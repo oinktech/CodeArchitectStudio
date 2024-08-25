@@ -28,11 +28,7 @@ onAuthStateChanged(auth, (user) => {
         }
     } else {
         console.log('用戶未登入');
-        hideUserInterface();
-        // 如果當前不是登錄頁面，則跳轉到登錄頁面
-        if (window.location.pathname !== '/index.html') {
-            window.location.href = "index.html";
-        }
+        
     }
 });
 
