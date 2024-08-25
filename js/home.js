@@ -21,9 +21,7 @@ const firestore = getFirestore(app);
 export function GoToOriginalCodeVersionPage() {
     window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/originalcodeversion.html'; 
 }
-export function GoToquestionVersionPage() {
-    window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/question.html'; 
-}
+
 export function GoToTeachingPage() {
     window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/teaching.html'; 
 }
@@ -32,6 +30,6 @@ export function GoToUploadPage() {
 }
 
 document.getElementById('teaching-btn').addEventListener('click', GoToTeachingPage);
-document.getElementById('question-btn').addEventListener('click', GoToquestionVersionPage);
+
 document.getElementById('originalcode-btn').addEventListener('click', GoToOriginalCodeVersionPage);
 document.getElementById('upload-btn').addEventListener('click', GoToUploadPage);
