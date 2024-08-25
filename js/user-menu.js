@@ -33,7 +33,7 @@ function showUserInterface(user) {
 
     if (personalInfoButton) {
         personalInfoButton.addEventListener('click', () => {
-            window.location.href = '../personalinformation.html';
+            window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/personalinformation.html';
         });
     }
 
