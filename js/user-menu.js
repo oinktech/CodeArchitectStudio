@@ -39,7 +39,7 @@ function showUserInterface(user) {
 
     if (homeButton) {
         homeButton.addEventListener('click', () => {
-            window.location.href = '../home.html';
+            window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/home.html';
         });
     }
 
