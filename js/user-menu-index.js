@@ -26,7 +26,7 @@ function showUserInterface(user) {
     `;
 
     document.getElementById('personalinfo-btn').addEventListener('click', () => {
-        window.location.href = '../personalinformation.html'; 
+        window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/personalinformation.html'; 
     });
 
     document.getElementById('logout-button').addEventListener('click', () => {
