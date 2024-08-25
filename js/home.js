@@ -23,16 +23,16 @@ onAuthStateChanged(auth, (user) => {
 
 
 export function GoToOriginalCodeVersionPage() {
-    window.location.href = '../originalcodeversion.html'; 
+    window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/originalcodeversion.html'; 
 }
 export function GoToquestionVersionPage() {
-    window.location.href = '../question.html'; 
+    window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/question.html'; 
 }
 export function GoToTeachingPage() {
-    window.location.href = '../teaching.html'; 
+    window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/teaching.html'; 
 }
 export function GoToUploadPage() {
-    window.location.href = '../upload_html_files.html'; 
+    window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/upload_html_files.html'; 
 }
 
 document.getElementById('teaching-btn').addEventListener('click', GoToTeachingPage);
