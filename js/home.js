@@ -15,11 +15,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        document.getElementById('welcome-message').textContent = `恭喜 ${user.displayName || '用戶'} 已成功登入`;
-    }
-});
+
 
 
 export function GoToOriginalCodeVersionPage() {
