@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>免費上傳Html檔案</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        h1 {
+            color: #333;
+            margin-top: 30px;
+            font-size: 2em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        input[type="file"] {
+            margin: 10px;
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+        #links {
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+            width: 100%;
+            position: relative;
+        }
+        #links h2 {
+            color: #333;
+            font-size: 1.5em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        #links .link-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        #links .link-item:hover {
+            background-color: #f1f3f5;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        #links .link-item span {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        #links .link-item button {
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        #links .link-item button:hover {
+            background-color: #c0392b;
+        }
+        #progress-container {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: none;
+        }
+        #progress-bar {
+            height: 20px;
+            background-color: #4caf50;
+            width: 0;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+            transition: width 0.4s;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .file-preview {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            overflow: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .file-preview iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+        }
+        .file-details {
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            overflow: auto;
+        }
+        .file-details h2 {
+            margin-top: 0;
+            font-size: 1.2em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .file-details p {
+            margin: 10px 0;
+        }
+        /* 預覽畫面樣式 */
+        .preview {
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            width: 300px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            transition: opacity 0.3s ease;
+        }
+        .preview iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+        .preview.show {
+            display: block;
+            opacity: 1;
+        }
+        .preview.hide {
+            opacity: 0;
+        }
+        /* 普通狀態 */
+a {
+    color: #007bff; /* 設定連結顏色 */
+    text-decoration: none; /* 去掉下劃線 */
+    font-weight: bold; /* 設定字體粗細 */
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s; /* 添加過渡效果 */
+    border-radius: 5px; /* 圓角邊框 */
+    padding: 5px 10px; /* 內邊距 */
+    display: inline-block; /* 使連結變為區塊級元素，便於設置內邊距 */
+}
+
+/* 懸停狀態 */
+a:hover {
+    color: #ffffff; /* 懸停時改變顏色 */
+    background-color: #007bff; /* 懸停時添加背景顏色 */
+    text-decoration: underline; /* 懸停時添加下劃線 */
+}
+
+/* 被訪問過的狀態 */
+a:visited {
+    color: #5a5a5a; /* 訪問過的連結顏色 */
+}
+
+/* 活動狀態 */
+a:active {
+    color: #0056b3; /* 活動時改變顏色 */
+    background-color: #e0e0e0; /* 活動時背景顏色 */
+    border-color: #0056b3; /* 活動時邊框顏色 */
+}
+
+/* 提示框 */
+a::before {
+    content: attr(title); /* 使用 title 屬性作為提示內容 */
+    display: block;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* 提示框顯示 */
+a:hover::before {
+    opacity: 1;
+    top: 100%; /* 顯示在連結下方 */
+    left: 0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="user-interface">
+            <button id="user-menu-toggle" class="user-menu-button">
+                <div class="user-information" id="user-information"></div>
+            </button>
+            <div id="user-menu" class="user-menu">
+                <!-- 用戶資訊會在這裡顯示 -->
+            </div>
+        </div>
+        <h1>免費上傳Html檔案</h1>
+        <button id="login-btn">使用 GitHub 登入</button>
+        <input type="file" id="file-input" style="display: none;">
+        <button id="upload-btn" style="display: none;">上傳文件</button>
+        <div id="progress-container">
+            <div id="progress-bar">0%</div>
+        </div>
+        <p id="status"></p>
+        <div id="links"></div>
+        <div class="file-preview" id="file-preview"></div>
+        <div class="file-details" id="file-details"></div>
+    </div>
+
+    <footer>
+        <p>如果有任何問題或需要進一步的幫助，請訪問我們的 <a href="support.html">支援頁面</a> 或聯繫我們的客服。</p>
+        <p>要評論此網站請前往<a href="./comment.html">評論頁面</a>。</p>
+        <p>&copy; 2024 Oink Tech。保留所有權利。</p>
+    </footer>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAuth, signInWithPopup, signOut, GithubAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBAjN_CHVH0-AmwrhkRWOMrekcbcMNjexE",
+            authDomain: "html-fed42.firebaseapp.com",
+            projectId: "html-fed42",
+            storageBucket: "html-fed42.appspot.com",
+            messagingSenderId: "976415952074",
+            appId: "1:976415952074:web:7e4ddeffbf9f9c16137833"
+        };
+
+        // 初始化 Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const storage = getStorage(app);
+        const firestore = getFirestore(app);
+
+        // GitHub 登入提供者
+        const provider = new GithubAuthProvider();
+
+        // 登入
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'block';
+                document.getElementById('file-input').style.display = 'block';
+                document.getElementById('upload-btn').style.display = 'block';
+                document.getElementById('status').innerText = `歡迎回來，${result.user.displayName}`;
+                loadLinks(result.user.uid); // 載入用戶的所有連結
+            } catch (error) {
+                document.getElementById('status').innerHTML = `<span class="error">登入錯誤: ${error.message}</span>`;
+            }
+        });
+
+        // 登出
+        // 登出
+    
+
+        // 上傳文件
+        document.getElementById('upload-btn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+            const progressBar = document.getElementById('progress-bar');
+            const progressContainer = document.getElementById('progress-container');
+
+            if (file) {
+                try {
+                    progressContainer.style.display = 'block';
+                    const fileRef = ref(storage, 'files/' + file.name);
+                    const uploadTask = uploadBytesResumable(fileRef, file);
+
+                    uploadTask.on('state_changed',
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            progressBar.style.width = progress + '%';
+                            progressBar.innerText = Math.round(progress) + '%';
+                        },
+                        (error) => {
+                            document.getElementById('status').innerHTML = `<span class="error">上傳錯誤: ${error.message}</span>`;
+                        },
+                        async () => {
+                            document.getElementById('status').innerText = '上傳完成';
+                            const url = await getDownloadURL(uploadTask.snapshot.ref);
+                            const user = auth.currentUser;
+                            if (user) {
+                                await addDoc(collection(firestore, 'user_links'), {
+                                    uid: user.uid,
+                                    url: url,
+                                    fileName: file.name,
+                                    timestamp: new Date().toISOString()
+                                });
+                                loadLinks(user.uid); // 載入用戶的所有連結
+                                showFilePreview(url); // 顯示文件預覽
+                                showFileDetails(file.name, url); // 顯示文件詳細資訊
+                            }
+                        }
+                    );
+                } catch (error) {
+                    document.getElementById('status').innerHTML = `<span class="error">上傳錯誤: ${error.message}</span>`;
+                }
+            } else {
+                document.getElementById('status').innerText = '請選擇文件';
+            }
+        });
+
+        // 載入用戶連結
+        async function loadLinks(uid) {
+            const linksContainer = document.getElementById('links');
+            linksContainer.innerHTML = '<h2>您的連結</h2>';
+            try {
+                const q = query(collection(firestore, 'user_links'), where('uid', '==', uid));
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    linksContainer.innerHTML += `
+                        <div class="link-item">
+                            <span><a href="${data.url}" target="_blank" data-url="${data.url}" class="link-with-preview">${data.fileName}</a></span>
+                            <span>${new Date(data.timestamp).toLocaleString()}</span>
+                            <button onclick="deleteLink('${doc.id}')">刪除</button>
+                        </div>`;
+                });
+
+                // 設定預覽顯示效果
+                const linkItems = document.querySelectorAll('.link-with-preview');
+                linkItems.forEach(link => {
+                    link.addEventListener('mouseover', (e) => {
+                        const preview = document.createElement('div');
+                        preview.className = 'preview show';
+                        preview.innerHTML = `<iframe src="${e.target.getAttribute('data-url')}" title="File Preview"></iframe>`;
+                        link.appendChild(preview);
+                    });
+                    link.addEventListener('mouseout', () => {
+                        const preview = link.querySelector('.preview');
+                        if (preview) {
+                            preview.classList.remove('show');
+                            preview.classList.add('hide');
+                            setTimeout(() => link.removeChild(preview), 300);
+                        }
+                    });
+                });
+            } catch (error) {
+                linksContainer.innerHTML = `<span class="error">載入連結錯誤: ${error.message}</span>`;
+            }
+        }
+
+        // 顯示文件預覽
+        function showFilePreview(url) {
+            const filePreview = document.getElementById('file-preview');
+            filePreview.innerHTML = `
+                <h2>文件預覽</h2>
+                <iframe src="${url}" title="File Preview"></iframe>`;
+        }
+
+        // 顯示文件詳細資訊
+        function showFileDetails(fileName, url) {
+            const fileDetails = document.getElementById('file-details');
+            fileDetails.innerHTML = `
+                <h2>文件詳細資訊</h2>
+                <p><strong>文件名稱:</strong> ${fileName}</p>
+                <p><strong>文件連結:</strong> <a href="${url}" target="_blank">${url}</a></p>`;
+        }
+
+        // 刪除連結
+                // 刪除連結
+                window.deleteLink = async (docId) => {
+            try {
+                await deleteDoc(doc(firestore, 'user_links', docId));
+                document.getElementById('status').innerText = '連結已刪除';
+                const user = auth.currentUser;
+                if (user) {
+                    loadLinks(user.uid); // 重新載入用戶的連結
+                }
+            } catch (error) {
+                document.getElementById('status').innerHTML = `<span class="error">刪除連結錯誤: ${error.message}</span>`;
+            }
+        };
+
+        // 初始化狀態
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('login-btn').style.display = 'none';
+
+                document.getElementById('file-input').style.display = 'block';
+                document.getElementById('upload-btn').style.display = 'block';
+                document.getElementById('status').innerText = `歡迎回來，${user.displayName}`;
+                loadLinks(user.uid); // 載入用戶的所有連結
+            } else {
+                document.getElementById('login-btn').style.display = 'block';
+                document.getElementById('file-input').style.display = 'none';
+                document.getElementById('upload-btn').style.display = 'none';
+                document.getElementById('status').innerText = '請登入';
+                document.getElementById('links').innerHTML = ''; // 清空連結
+                document.getElementById('file-preview').innerHTML = ''; // 清空預覽
+                document.getElementById('file-details').innerHTML = ''; // 清空文件詳情
+            }
+        });
+    </script>
+    <script src="./js/user-menu.js" type="module"></script>
+</body>
+</html>
+

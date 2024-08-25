@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>即時代碼編輯器</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/monokai.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/scroll/simplescrollbars.min.css">
+    <style>
+        body, html {
+            height: 100%; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+        header {
+            background-color: #007bff; 
+            color: #ffffff; 
+            padding: 10px; 
+            text-align: center;
+        }
+        #editor-container {
+            display: flex; 
+            height: calc(100% - 120px);
+        }
+        #editor, #preview-container {
+            flex: 1; 
+            padding: 10px; 
+            box-sizing: border-box;
+        }
+        #preview-container {
+            border-top: 1px solid #ccc; 
+            overflow: hidden;
+        }
+        #preview {
+            width: 100%; 
+            height: 100%; 
+            border: none;
+        }
+        #preview-message {
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-size: 18px; 
+            color: #888;
+        }
+        #controls {
+            background: #f4f4f4; 
+            padding: 10px; 
+            text-align: center; 
+            border-top: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px; 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            transition: background-color 0.3s; 
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3; 
+        }
+        .btn-group {
+            margin-bottom: 10px;
+        }
+        .btn-group button {
+            margin-right: 10px;
+        }
+        .theme-switcher {
+            margin-bottom: 10px;
+        }
+        .file-name-input {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Html 原碼編寫</h1>
+    </header>
+    <div class="user-interface">
+        <button id="user-menu-toggle" class="user-menu-button">
+            <div class="user-information" id="user-information"></div>
+        </button>
+        <div id="user-menu" class="user-menu">
+            <!-- 用戶資訊會在這裡顯示 -->
+        </div>
+    </div>
+    <div id="editor-container">
+        <div id="editor" class="resizable">
+            <textarea id="code-input" placeholder="在此輸入 HTML、CSS 和 JavaScript 代碼...">&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-Hant"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;即時預覽&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 { color: #333; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+        </div>
+        <div id="preview-container">
+            <iframe id="preview"></iframe>
+            <div id="preview-message">即時預覽會顯示在這裡</div>
+        </div>
+    </div>
+
+    <div id="controls">
+        <div class="btn-group">
+            <button onclick="goLive()">立即預覽</button>
+            <button onclick="clearEditor()">清空編輯器</button>
+            <div class="file-name-input">
+                <input type="text" id="file-name" placeholder="自訂文件名稱" />
+            </div>
+            <button onclick="saveCode()">儲存代碼</button>
+            <button onclick="loadCode()">載入代碼</button>
+        </div>
+        <div class="btn-group">
+            <label for="auto-refresh">自動刷新</label>
+            <input type="checkbox" id="auto-refresh" checked onchange="toggleAutoRefresh()">
+        </div>
+        <div class="btn-group">
+            <button onclick="insertText('<h1>', '</h1>')">H1</button>
+            <button onclick="insertText('<p>', '</p>')">P</button>
+            <button onclick="insertText('<div>', '</div>')">Div</button>
+            <button onclick="insertText('<style>', '</style>')">Style</button>
+            <button onclick="insertText('<script>', '</script>')">Script</button>
+        </div>
+        <div class="theme-switcher">
+            <label for="theme">主題：</label>
+            <select id="theme" onchange="changeTheme()">
+                <option value="default">預設</option>
+                <option value="dracula">Dracula</option>
+                <option value="monokai">Monokai</option>
+            </select>
+        </div>
+        <button onclick="formatCode()">格式化代碼</button>
+        <p>⚠️如要公開Html檔案,請先下載,再到<a href="./upload_html_files.html">這個網站</a>上傳⚠️</p>
+    </div>
+    <footer>
+        <p>如果有任何問題或需要進一步的幫助，請訪問我們的 <a href="support.html">支援頁面</a> 或聯繫我們的客服。</p>
+        <p>要評論此網站請前往<a href="./comment.html">評論頁面</a>。</p>
+        <p>&copy; 2024 Oink Tech。保留所有權利。</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/formatting.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/scrollpastend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/display/placeholder.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/fold/foldcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/fold/brace.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/fold/xml-fold.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/show-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/hint/html-hint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.8.8/prettier.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.8.8/parser-html.min.js"></script>
+    <script>
+        const editor = CodeMirror.fromTextArea(document.getElementById("code-input"), {
+            mode: "htmlmixed",
+            theme: "default",
+            lineNumbers: true,
+            autoCloseBrackets: true,
+            extraKeys: {"Ctrl-Space": "autocomplete"},
+            lineWrapping: true
+        });
+
+        let autoRefreshInterval;
+
+        function goLive() {
+            const code = editor.getValue();
+            const iframe = document.getElementById('preview');
+            const previewMessage = document.getElementById('preview-message');
+            iframe.srcdoc = code;
+            previewMessage.style.display = 'none';
+        }
+
+        function clearEditor() {
+            editor.setValue('');
+            document.getElementById('preview').srcdoc = '';
+            document.getElementById('preview-message').style.display = 'block';
+        }
+
+        function saveCode() {
+            const code = editor.getValue();
+            const fileName = document.getElementById('file-name').value || 'index.html';
+            if (fileName.trim() === '') {
+                alert('請輸入檔案名稱');
+                return;
+            }
+            const blob = new Blob([code], {type: 'text/html'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function loadCode() {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.html';
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    editor.setValue(e.target.result);
+                };
+                reader.readAsText(file);
+            });
+            fileInput.click();
+        }
+
+        function insertText(startTag, endTag) {
+            const doc = editor.getDoc();
+            const cursor = doc.getCursor();
+            const selectedText = doc.getSelection();
+            const text = startTag + selectedText + endTag;
+            doc.replaceSelection(text);
+        }
+
+        function formatCode() {
+            const code = editor.getValue();
+            const formattedCode = prettier.format(code, { parser: "html" });
+            editor.setValue(formattedCode);
+        }
+
+        function toggleAutoRefresh() {
+            if (document.getElementById('auto-refresh').checked) {
+                autoRefreshInterval = setInterval(goLive, 1000);
+            } else {
+                clearInterval(autoRefreshInterval);
+            }
+        }
+
+        function changeTheme() {
+            const theme = document.getElementById('theme').value;
+            editor.setOption('theme', theme);
+        }
+
+        window.onload = () => {
+            document.getElementById('auto-refresh').checked = true;
+            toggleAutoRefresh();
+        };
+    </script>
+    <script src="./js/user-menu.js" type="module"></script>
+</body>
+</html>

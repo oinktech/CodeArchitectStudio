@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人資料</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <h1>個人資料</h1>
+            
+            <div id="user-info" class="user-info">
+                <!-- 用戶資訊和頭像會顯示在這裡 -->
+            </div>
+
+            <div id="admin-section" class="admin-section" style="display: none;">
+                <p>您是管理員。</p>
+                <a href="admin-user.html" class="btn primary-btn">查看用戶登入方式</a>
+            </div>
+
+            <div id="update-username" class="form-section">
+                <h2>變更用戶名</h2>
+                <input type="text" id="new-username" placeholder="輸入新用戶名" class="input-text">
+                <button id="update-username-button" class="btn primary-btn">更新用戶名</button>
+                <p id="update-status"></p>
+            </div>
+
+            <div id="upload-avatar" class="form-section">
+                <h2>上傳頭像</h2>
+                <h4>⭐上傳的頭像要去除背景會比較好看⭐</h4>
+                <input type="file" id="avatar-input" accept="image/*" class="input-file">
+                <button id="upload-avatar-button" class="btn primary-btn">上傳頭像</button>
+                <p id="upload-status"></p>
+                
+            </div>
+
+            <div id="reset-avatar" class="form-section">
+                <h2>恢復預設頭像</h2>
+                <button id="reset-avatar-button" class="btn secondary-btn">恢復預設</button>
+                <p id="reset-status"></p>
+            </div>
+
+            <button id="logout-button" class="btn secondary-btn">登出</button>
+            <p><a href="home.html">返回首頁</a></p>
+        </header>
+
+        <footer class="footer">
+            <p>如果有任何問題或需要進一步的幫助，請訪問我們的 <a href="support.html">支援頁面</a> 或聯繫我們的客服。</p>
+            <p>要評論此網站請前往<a href="./comment.html">評論頁面</a>。</p>
+            <p>&copy; 2024 Oink Tech。保留所有權利。</p>
+        </footer>
+    </div>
+    <script type="module" src="js/profile.js"></script>
+</body>
+</html>

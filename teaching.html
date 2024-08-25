@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 基本教學</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #0056b3;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffd700;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h2, h3 {
+            color: #007bff;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        
+        .button {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section code {
+            background: #f8f9fa;
+            border-radius: 4px;
+            padding: 10px;
+            display: block;
+            overflow-x: auto;
+        }
+        .section pre {
+            margin: 0;
+        }
+        .collapse {
+            cursor: pointer;
+            background: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        .collapse:hover {
+            background: #0056b3;
+        }
+        .content {
+            display: none;
+            padding: 10px;
+            background: #f2f2f2;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .active + .content {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group button {
+            background: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background: #218838;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .modal-content h2 {
+            margin-top: 0;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="user-interface">
+        <button id="user-menu-toggle" class="user-menu-button">
+            <div class="user-information" id="user-information"></div>
+        </button>
+        <div id="user-menu" class="user-menu">
+            <!-- 用戶資訊會在這裡顯示 -->
+        </div>
+    </div>
+    <header>
+        <h1>HTML 基本教學</h1>
+    </header>
+    <nav>
+        <a href="#structure">文件結構</a>
+        <a href="#tags">常用標籤</a>
+        <a href="#form">表單</a>
+        <a href="#comments">注釋</a>
+    </nav>
+    <main>
+        <section id="structure" class="section">
+            <h2>1. HTML 文件結構</h2>
+            <p>以下是基本的 HTML 文件結構範例：</p>
+            <pre>
+                <code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-Hant"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;我的第一個網頁&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;歡迎來到我的網站&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;main&gt;
+        &lt;h2&gt;關於我&lt;/h2&gt;
+        &lt;p&gt;這是一段關於我的介紹文字。&lt;/p&gt;
+        &lt;h3&gt;我的興趣&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;閱讀&lt;/li&gt;
+            &lt;li&gt;旅行&lt;/li&gt;
+            &lt;li&gt;編程&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;h3&gt;聯絡方式&lt;/h3&gt;
+        &lt;p&gt;你可以通過電子郵件聯繫我：&lt;a href="mailto:example@example.com"&gt;example@example.com&lt;/a&gt;&lt;/p&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2024 我的網站&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section id="tags" class="section">
+            <h2>2. 常用標籤</h2>
+            <button class="collapse">2.1 標題</button>
+            <div class="content">
+                <pre>
+                    <code>
+&lt;h1&gt;這是標題 1&lt;/h1&gt;
+&lt;h2&gt;這是標題 2&lt;/h2&gt;
+&lt;h3&gt;這是標題 3&lt;/h3&gt;
+&lt;h4&gt;這是標題 4&lt;/h4&gt;
+&lt;h5&gt;這是標題 5&lt;/h5&gt;
+&lt;h6&gt;這是標題 6&lt;/h6&gt;
+                    </code>
+                </pre>
+            </div>
+            <button class="collapse">2.2 段落和超鏈接</button>
+            <div class="content">
+                <pre>
+                    <code>
+&lt;p&gt;這是一段文字。&lt;/p&gt;
+&lt;a href="https://www.example.com"&gt;點擊這裡訪問 Example&lt;/a&gt;
+                    </code>
+                </pre>
+            </div>
+            <button class="collapse">2.3 列表</button>
+            <div class="content">
+                <pre>
+                    <code>
+&lt;ul&gt;
+    &lt;li&gt;項目 1&lt;/li&gt;
+    &lt;li&gt;項目 2&lt;/li&gt;
+    &lt;li&gt;項目 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;項目 1&lt;/li&gt;
+    &lt;li&gt;項目 2&lt;/li&gt;
+    &lt;li&gt;項目 3&lt;/li&gt;
+&lt;/ol&gt;
+                    </code>
+                </pre>
+            </div>
+            <button class="collapse">2.4 按鈕</button>
+            <div class="content">
+                <pre>
+                    <code>
+&lt;button&gt;點擊我&lt;/button&gt;
+                    </code>
+                </pre>
+            </div>
+            <button class="collapse">2.5 圖片</button>
+            <div class="content">
+                <pre>
+                    <code>
+&lt;img src="image.jpg" alt="描述文字"&gt;
+                    </code>
+                </pre>
+            </div>
+            <button class="collapse">2.6 表格</button>
+            <div class="content">
+                <pre>
+                    <code>
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;標題 1&lt;/th&gt;
+        &lt;th&gt;標題 2&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;數據 1&lt;/td&gt;
+        &lt;td&gt;數據 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;數據 3&lt;/td&gt;
+        &lt;td&gt;數據 4&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+                    </code>
+                </pre>
+            </div>
+        </section>
+
+        <section id="form" class="section">
+            <h2>3. 表單</h2>
+            <button class="collapse">3.1 基本表單</button>
+            <div class="content">
+                <pre>
+                    <code>
+&lt;form action="/submit" method="post"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="name"&gt;姓名:&lt;/label&gt;
+        &lt;input type="text" id="name" name="name"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label for="email"&gt;電子郵件:&lt;/label&gt;
+        &lt;input type="email" id="email" name="email"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;button type="submit"&gt;提交&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+                    </code>
+                </pre>
+            </div>
+        </section>
+
+        <section id="comments" class="section">
+            <h2>4. HTML 注釋</h2>
+            <pre>
+                <code>
+&lt;!-- 這是一個注釋 --&gt;
+&lt;p&gt;這是一段顯示的文本。&lt;/p&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section id="modal" class="section">
+            <h2>5. 彈出對話框</h2>
+            <button id="openModal" class="button">顯示彈出對話框</button>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <button class="modal-close">&times;</button>
+                    <h2>彈出對話框標題</h2>
+                    <p>這是彈出對話框的內容。</p>
+                </div>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="#structure" class="button">返回文件結構</a>
+            <a href="#tags" class="button">查看標籤</a>
+            <a href="#form" class="button">查看表單</a>
+            <a href="#comments" class="button">查看注釋</a>
+            <a href="#modal" class="button">查看彈出對話框</a>
+        </div>
+    </main>
+    <a href="./home.html">返回首頁</a>
+    <footer>
+        <p>&copy; 2024 HTML 教學網站</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.collapse').forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+                const content = button.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        const modal = document.getElementById('myModal');
+        const openModalButton = document.getElementById('openModal');
+        const closeModalButton = document.querySelector('.modal-close');
+
+        openModalButton.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+    <script src="./js/user-menu.js" type="module"></script>
+</body>
+</html>

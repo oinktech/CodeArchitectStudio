@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeArchitect Studio</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="./images/title.png" style="height: auto;width: 30%;">
+            <h1>CodeArchitect Studio</h1>
+            <p>成為頂尖虛擬網頁建築師，完成任務，學習 HTML 技能！</p>
+            <button id="github-login-button">使用 GitHub 登入</button>
+            <button id="google-login-button">使用 Google 登入</button>
+            <button id="email-login-toggle">使用 Email 登入</button>
+            <button id="signup-toggle">註冊帳號</button>
+        </header>
+        
+        <!-- 登入表單 -->
+        <div id="login-form" style="display: none;">
+            <h2>登入</h2>
+            <input type="email" id="login-email" placeholder="電子郵件" required>
+            <input type="password" id="login-password" placeholder="密碼" required>
+            <button id="login-button">登入</button>
+            <p>忘記密碼？<a href="#" id="forgot-password-link">重設密碼</a></p>
+            <form id="forgot-password-form" style="display: none;">
+                <input type="email" id="reset-email" placeholder="輸入您的電子郵件" required>
+                <button type="button" id="reset-password-button">發送重置郵件</button>
+                <button type="button" id="cancel-reset">取消</button>
+            </form>
+        </div>
+
+        <!-- 註冊表單 -->
+        <div id="signup-form" style="display: none;">
+            <h2>註冊</h2>
+            <input type="email" id="signup-email" placeholder="電子郵件" required>
+            <input type="password" id="signup-password" placeholder="密碼" required>
+            <button id="signup-button">註冊</button>
+        </div>
+    </div>
+
+    <!-- 用戶界面菜單 -->
+    <div class="user-interface" style="display: none;">
+        <div class="user-menu"></div>
+    </div>
+
+    <footer>
+        <p>如果有任何問題或需要進一步的幫助，請訪問我們的 <a href="support.html">支援頁面</a> 或聯繫我們的客服。</p>
+        <p>要評論此網站請前往<a href="./comment.html">評論頁面</a>。</p>
+        <p>&copy; 2024 Oink Tech。保留所有權利。</p>
+    </footer>
+    
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/user-menu.js"></script>
+</body>
+</html>

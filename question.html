@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 題目</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .question.active {
+            display: block;
+        }
+        .question h3 {
+            margin: 0;
+        }
+        .question p {
+            margin: 5px 0 0;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML 題目</h1>
+    <div id="question-container">
+        <div class="question active" data-id="1">
+            <h3>1. HTML 的全名是什麼？</h3>
+            <input type="text" id="answer-1" placeholder="輸入答案...">
+        </div>
+        <div class="question" data-id="2">
+            <h3>2. 怎麼在 HTML 文件中添加圖片？</h3>
+            <input type="text" id="answer-2" placeholder="輸入答案...">
+        </div>
+        <div class="question" data-id="3">
+            <h3>3. HTML 中的 &lt;a&gt; 標籤用於什麼？</h3>
+            <input type="text" id="answer-3" placeholder="輸入答案...">
+        </div>
+        <div class="question" data-id="4">
+            <h3>4. 如何在 HTML 文件中創建一個表格？</h3>
+            <input type="text" id="answer-4" placeholder="輸入答案...">
+        </div>
+        <div class="question" data-id="5">
+            <h3>5. &lt;form&gt; 標籤的作用是什麼？</h3>
+            <input type="text" id="answer-5" placeholder="輸入答案...">
+        </div>
+    </div>
+    <div class="navigation">
+        <button id="prev-btn">上一題</button>
+        <button id="next-btn">下一題</button>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const questions = document.querySelectorAll('.question');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function showQuestion(id) {
+            questions.forEach(q => q.classList.remove('active'));
+            const question = document.querySelector(`.question[data-id="${id}"]`);
+            if (question) {
+                question.classList.add('active');
+            }
+        }
+
+        function updateButtons() {
+            prevBtn.disabled = currentQuestion === 1;
+            nextBtn.disabled = currentQuestion === questions.length;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 1) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+                updateButtons();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < questions.length) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+                updateButtons();
+            }
+        });
+
+        // Initialize
+        showQuestion(currentQuestion);
+        updateButtons();
+    </script>
+</body>
+</html>
