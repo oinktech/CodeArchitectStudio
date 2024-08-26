@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-import { getAuth, signInWithPopup, GithubAuthProvider, GoogleAuthProvider, EmailAuthProvider, onAuthStateChanged, signOut, sendPasswordResetEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, EmailAuthProvider, onAuthStateChanged, signOut, sendPasswordResetEmail, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 // Firebase 初始化配置
 const firebaseConfig = {
@@ -14,7 +14,6 @@ const firebaseConfig = {
 // 初始化 Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const githubProvider = new GithubAuthProvider();
 const googleProvider = new GoogleAuthProvider();
 
 // 頁面加載時檢查用戶登錄狀態
