@@ -33,17 +33,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // 添加 GitHub 登錄按鈕事件監聽器
-document.getElementById('github-login-button').addEventListener('click', () => {
-    signInWithPopup(auth, githubProvider)
-        .then((result) => {
-            const user = result.user;
-            console.log('用戶資訊:', user);
-            window.location.href = "home.html";
-        })
-        .catch((error) => {
-            handleAuthError(error, 'GitHub 登入失敗');
-        });
-});
+
 
 // 添加 Google 登錄按鈕事件監聽器
 document.getElementById('google-login-button').addEventListener('click', () => {
