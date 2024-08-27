@@ -1,0 +1,223 @@
+# Code Architect Studio Documentation
+
+Welcome to the Code Architect Studio Documentation! 📚 This guide will help you get started with Code Architect Studio, explore its features, and provide instructions on how to use and contribute to the project.
+
+---
+
+## Language Selection
+
+Please select your preferred language:
+
+- [English](#english)
+- [中文](#中文)
+
+---
+
+## English
+
+### Introduction 🌟
+
+**Code Architect Studio** is a powerful tool designed for visualizing and managing code architecture. With its intuitive interface, you can design, analyze, and optimize your software systems, making it easier to understand and improve your codebase.
+
+### Features 🚀
+
+Code Architect Studio comes with a range of features to enhance your development experience:
+
+- **Visual Representation**: View and manage your code architecture in a graphical format. 📈
+- **Interactive Design Tools**: Use drag-and-drop functionality to design and modify your software systems. 🎨
+- **Integration Support**: Seamlessly integrate with various development environments and tools. 🔗
+- **Customizable Layouts**: Tailor the layout to fit your project needs and preferences. 🛠️
+- **Real-time Collaboration**: Collaborate with team members in real-time to improve productivity. 💬
+
+### Installation 🛠️
+
+To get started with Code Architect Studio, follow these installation steps:
+
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/oinktech/CodeArchitectStudio.git
+    ```
+2. **Navigate to the Project Directory**:
+    ```bash
+    cd CodeArchitectStudio
+    ```
+3. **Install Dependencies**:
+    ```bash
+    npm install
+    ```
+4. **Run the Project**:
+    ```bash
+    npm start
+    ```
+
+For more detailed installation instructions, refer to the [Installation Guide](https://oinktech.github.io/CodeArchitectStudio/docs/installation).
+
+### Usage 📖
+
+Once Code Architect Studio is installed, you can start using it by following these steps:
+
+1. **Open the Application**: Launch Code Architect Studio from your terminal or application menu.
+2. **Create a New Project**: Go to `File` > `New Project` to start a new architecture design.
+3. **Add Components**: Use the interactive tools to add and configure components of your software system.
+4. **Save Your Work**: Save your project regularly to prevent data loss. Use `File` > `Save` or `Save As`.
+
+For detailed usage instructions, please refer to the [User Guide](https://oinktech.github.io/CodeArchitectStudio/docs/user-guide).
+
+### Getting Started 🚀
+
+To help you get up and running quickly, we've prepared a quick start guide:
+
+1. **Download and Install**: Follow the installation instructions above to set up Code Architect Studio.
+2. **Explore the Interface**: Familiarize yourself with the user interface and available tools.
+3. **Create Your First Design**: Start by creating a new project and adding some components to get a feel for the design process.
+4. **Consult the Documentation**: Use the user guide and other documentation to learn more about advanced features and best practices.
+
+### Advanced Features 🌟
+
+Explore the advanced features of Code Architect Studio to make the most of your design work:
+
+- **Custom Templates**: Create and use custom templates to streamline your design process. 🛠️
+- **Version Control**: Integrate with version control systems to manage changes and collaborate with your team. 🔄
+- **Performance Analysis**: Use built-in tools to analyze and optimize the performance of your software architecture. 📊
+
+For more information on advanced features, check out the [Advanced Features Guide](https://oinktech.github.io/CodeArchitectStudio/docs/advanced-features).
+
+### Contributing 🤝
+
+We welcome contributions from the community! To contribute to Code Architect Studio, please follow these steps:
+
+1. **Fork the Repository**: Click the "Fork" button on the [Code Architect Studio GitHub page](https://github.com/oinktech/CodeArchitectStudio).
+2. **Create a New Branch**: 
+    ```bash
+    git checkout -b my-new-feature
+    ```
+3. **Make Changes and Commit**: 
+    ```bash
+    git commit -am 'Add new feature'
+    ```
+4. **Push Changes to Your Fork**:
+    ```bash
+    git push origin my-new-feature
+    ```
+5. **Open a Pull Request**: Go to the original repository and open a pull request with a description of your changes.
+
+For detailed contributing guidelines, refer to the [CONTRIBUTING.md](https://github.com/oinktech/CodeArchitectStudio/blob/main/CONTRIBUTING.md) file.
+
+### Support 💬
+
+If you have any questions or need support, please reach out to us:
+
+- **GitHub Issues**: [Report an Issue](https://github.com/oinktech/CodeArchitectStudio/issues)
+- **Community Forums**: Join discussions and get help from other users on our [Community Forums](https://oinktech.github.io/CodeArchitectStudio/community).
+- **Email**: Contact us at [support@oinktech.com](mailto:support@oinktech.com)
+
+### License 📜
+
+Code Architect Studio is licensed under the MIT License. See the [LICENSE](https://github.com/oinktech/CodeArchitectStudio/blob/main/LICENSE) file for details.
+
+---
+
+## 中文
+
+### 簡介 🌟
+
+**Code Architect Studio** 是一款強大的工具，旨在可視化和管理代碼架構。通過其直觀的界面，您可以設計、分析和優化您的軟體系統，使其更易於理解和改進您的代碼庫。
+
+### 特性 🚀
+
+Code Architect Studio 提供了一系列功能來提升您的開發體驗：
+
+- **可視化表示**：以圖形化的格式查看和管理您的代碼架構。 📈
+- **互動設計工具**：使用拖放功能設計和修改您的軟體系統。 🎨
+- **整合支持**：與各種開發環境和工具無縫整合。 🔗
+- **可定制佈局**：根據您的項目需求和偏好調整佈局。 🛠️
+- **即時協作**：與團隊成員即時協作，提高生產力。 💬
+
+### 安裝 🛠️
+
+要開始使用 Code Architect Studio，請按照以下步驟進行安裝：
+
+1. **克隆代碼庫**：
+    ```bash
+    git clone https://github.com/oinktech/CodeArchitectStudio.git
+    ```
+2. **進入項目目錄**：
+    ```bash
+    cd CodeArchitectStudio
+    ```
+3. **安裝依賴**：
+    ```bash
+    npm install
+    ```
+4. **運行項目**：
+    ```bash
+    npm start
+    ```
+
+有關更詳細的安裝說明，請參閱 [安裝指南](https://oinktech.github.io/CodeArchitectStudio/docs/installation)。
+
+### 使用 📖
+
+安裝完成後，您可以按照以下步驟開始使用 Code Architect Studio：
+
+1. **打開應用程序**：從終端或應用菜單中啟動 Code Architect Studio。
+2. **創建新項目**：前往 `文件` > `新建項目` 以開始新的架構設計。
+3. **添加組件**：使用互動工具添加和配置軟體系統的組件。
+4. **保存您的工作**：定期保存您的項目以防數據丟失。使用 `文件` > `保存` 或 `另存為`。
+
+有關詳細的使用說明，請參閱 [用戶指南](https://oinktech.github.io/CodeArchitectStudio/docs/user-guide)。
+
+### 快速入門 🚀
+
+為了幫助您快速入門，我們準備了快速入門指南：
+
+1. **下載和安裝**：按照上述安裝說明設置 Code Architect Studio。
+2. **探索界面**：熟悉用戶界面和可用的工具。
+3. **創建您的第一次設計**：通過創建新項目並添加一些組件來熟悉設計過程。
+4. **查閱文檔**：使用用戶指南和其他文檔了解更多高級功能和最佳實踐。
+
+### 高級功能 🌟
+
+探索 Code Architect Studio 的高級功能，以充分發揮您的設計工作：
+
+- **自定義模板**：創建和使用自定義模板以簡化設計過程。 🛠️
+- **版本控制**：與版本控制系統集成，以管理更改並與團隊協作。 🔄
+- **性能分析**：使用內置工具分析和優化軟體架構的性能。 📊
+
+有關更多高級功能的信息，請查看 [高級功能指南](https://oinktech.github.io/CodeArchitectStudio/docs/advanced-features)。
+
+### 貢獻 🤝
+
+我們歡迎社區的貢獻！要為 Code Architect Studio 做出貢獻，請按照以下步驟操作：
+
+1. **派生代碼庫**：點擊 [Code Architect Studio GitHub 頁面](https://github.com/oinktech/CodeArchitectStudio) 上的“Fork”按鈕。
+2. **創建新分支**： 
+    ```bash
+    git checkout -b my-new-feature
+    ```
+3. **進行更改並提交**： 
+    ```bash
+    git commit -am 'Add new feature'
+    ```
+4. **推送更改到您的 Fork**：
+    ```bash
+    git push origin my-new-feature
+    ```
+5. **打開拉取請求**：前往原始代碼庫並打開一個拉取請求，描述您的更改。
+
+有關詳細的貢獻指南，請參閱 [CONTRIBUTING.md](https://github.com/oinktech/CodeArchitectStudio/blob/main/CONTRIBUTING.md) 文件。
+
+### 支持 💬
+
+如果您有任何問題或需要支持，請與我們聯繫：
+
+- **GitHub Issues**： [報告問題](https://github.com/oinktech/CodeArchitectStudio/issues)
+- **社區論壇**：加入討論並在我們的 [社區論壇](https://oinktech.github.io/CodeArchitectStudio/community) 中獲得幫助。
+- **電子郵件**：聯繫我們 [support@oinktech.com](mailto:support@oinktech.com)
+
+### 許可證 📜
+
+Code Architect Studio 根據 MIT 許可證授權。詳細信息，請參閱 [LICENSE](https://github.com/oinktech/CodeArchitectStudio/blob/main/LICENSE) 文件。
+
+---
+
