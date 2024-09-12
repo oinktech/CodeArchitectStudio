@@ -3,8 +3,8 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5; /* 背景色 */
-    color: #333; /* 文本颜色 */
+    background-color: #2e2e2e; /* 背景色 */
+    color: #dcdcdc; /* 文本颜色 */
     height: 100%;
     line-height: 1.6;
     overflow-x: hidden; /* 防止横向滚动 */
@@ -16,16 +16,19 @@ body, html {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    position: relative; /* 确保容器内的元素相对定位 */
+    background-color: #333; /* 背景色与容器色 */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 /* 标题栏样式 */
 header {
-    background-color: #ffffff; /* 主色调 */
-    color: #333;
+    background-color: #444; /* 主色调 */
+    color: #dcdcdc;
     padding: 20px;
     text-align: center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #555;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
@@ -35,12 +38,12 @@ h1 {
     margin: 0;
     font-size: 2.5em;
     font-weight: 700;
-    color: #333;
+    color: #dcdcdc;
 }
 
 /* 按钮样式 */
 button {
-    background-color: #007bff; /* 主色调 */
+    background-color: #0099ff; /* 主色调 */
     color: #ffffff;
     border: none;
     padding: 12px 24px;
@@ -53,7 +56,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* 悬停状态颜色 */
+    background-color: #007acc; /* 悬停状态颜色 */
     transform: scale(1.05);
 }
 
@@ -63,7 +66,7 @@ button:focus {
 
 /* 用户界面样式 */
 .user-interface {
-    position: absolute; /* 使其相对于 .container 定位 */
+    position: absolute;
     top: 20px;
     right: 20px;
     display: flex;
@@ -75,8 +78,8 @@ button:focus {
 .user-profile {
     display: flex;
     align-items: center;
-    background-color: #ffffff; /* 主色调 */
-    border: 1px solid #e0e0e0;
+    background-color: #444; /* 主色调 */
+    border: 1px solid #555;
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -88,50 +91,50 @@ button:focus {
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    object-fit: cover; /* 图片裁剪方式 */
+    object-fit: cover;
     margin-right: 10px;
 }
 
 .user-profile p {
     margin: 0;
     font-size: 14px;
-    color: #333;
+    color: #dcdcdc;
 }
 
 /* 用户菜单按钮样式 */
 .user-menu-button {
-    background-color: #ffffff; /* 白色背景 */
-    color: #333;
-    border: 1px solid #ddd;
-    padding: 0; /* 内边距改为 0 */
+    background-color: #444; /* 背景色 */
+    color: #dcdcdc;
+    border: 1px solid #555;
+    padding: 0;
     cursor: pointer;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 50px; /* 设置固定宽度 */
-    height: 50px; /* 设置固定高度 */
+    width: 50px;
+    height: 50px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* 防止内容超出按钮 */
+    overflow: hidden;
 }
 
 .user-menu-button img {
-    width: 80%; /* 确保图片缩放到按钮内 */
+    width: 80%;
     height: auto;
-    object-fit: contain; /* 图片内容适应按钮 */
-    transition: transform 0.3s ease; /* 添加过渡效果 */
+    object-fit: contain;
+    transition: transform 0.3s ease;
 }
 
 .user-menu-button:hover img {
-    transform: scale(1.1); /* 悬停时放大图片 */
+    transform: scale(1.1);
 }
 
 .user-menu-button:hover {
-    background-color: #e0e0e0; /* 悬停状态颜色 */
+    background-color: #555; /* 悬停状态颜色 */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    transform: scale(1.05); /* 悬停时按钮放大 */
+    transform: scale(1.05);
 }
 
 /* 用户菜单 */
@@ -140,8 +143,8 @@ button:focus {
     position: absolute;
     top: 60px;
     right: 0;
-    background-color: #ffffff; /* 主色调 */
-    border: 1px solid #e0e0e0;
+    background-color: #444; /* 主色调 */
+    border: 1px solid #555;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
     width: 250px;
     border-radius: 8px;
@@ -154,19 +157,19 @@ button:focus {
     display: block;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0); /* 显示时不移动 */
+    transform: translateY(0);
 }
 
 .user-menu {
-    transform: translateY(-10px); /* 隐藏时向上移动 */
+    transform: translateY(-10px);
 }
 
 .user-menu p {
     margin: 0;
     padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #555;
     font-size: 14px;
-    color: #333;
+    color: #dcdcdc;
 }
 
 .user-menu p:last-child {
@@ -174,7 +177,7 @@ button:focus {
 }
 
 #logout-button {
-    background-color: #d9534f; /* 红色按钮 */
+    background-color: #d9534f;
     color: #ffffff;
     border: none;
     padding: 10px;
@@ -186,17 +189,17 @@ button:focus {
 }
 
 #logout-button:hover {
-    background-color: #c9302c; /* 悬停状态颜色 */
+    background-color: #c9302c;
     transform: scale(1.05);
 }
 
 /* 页脚样式 */
 footer {
-    background-color: #ffffff; /* 主色调 */
-    color: #333;
+    background-color: #444; /* 主色调 */
+    color: #dcdcdc;
     text-align: center;
     padding: 20px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid #555;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -207,19 +210,19 @@ footer p {
 
 /* 链接样式 */
 a {
-    color: #007bff; /* 主色调 */
+    color: #0099ff; /* 主色调 */
     text-decoration: none;
     transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
 a:hover {
-    color: #0056b3; /* 悬停状态颜色 */
+    color: #007acc; /* 悬停状态颜色 */
     text-decoration: underline;
 }
 
 a:focus {
     outline: none;
-    border-bottom: 2px solid #007bff; /* 焦点状态下的底部边框 */
+    border-bottom: 2px solid #0099ff;
 }
 
 a:active {
@@ -233,7 +236,10 @@ a:active {
     object-fit: cover;
     margin-right: 10px;
 }
-div#admin-section{
-    background-color: #d6d6d6;
+
+div#admin-section {
+    background-color: #555; /* 背景色 */
     border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
