@@ -19,14 +19,14 @@ const firestore = getFirestore(app);
 
 
 export function GoToOriginalCodeVersionPage() {
-    window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/originalcodeversion.html'; 
+    window.location.href = 'originalcodeversion.html'; 
 }
 
 export function GoToTeachingPage() {
-    window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/teaching.html'; 
+    window.location.href = 'teaching.html'; 
 }
 export function GoToUploadPage() {
-    window.location.href = 'https://oinktech.github.io/CodeArchitectStudio/upload_html_files.html'; 
+    window.location.href = 'upload_html_files.html'; 
 }
 
 document.getElementById('teaching-btn').addEventListener('click', GoToTeachingPage);
